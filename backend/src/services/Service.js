@@ -39,9 +39,9 @@ class Service {
         }
     }
 
-    async getAll() {
+    async getAll(options={}) {
         try {
-            const items = await this.db.findAll();
+            const items = await this.db.findAll(options);
             return items;
         } catch (err) {
             throw err;

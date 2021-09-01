@@ -13,6 +13,10 @@ module.exports = {
         allowNull: false,
         references: { model: 'users', key: 'user_id' },
       },
+      activ_name: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       activ_description: {
         allowNull: false,
         type: Sequelize.STRING

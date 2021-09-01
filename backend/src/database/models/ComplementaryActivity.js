@@ -13,6 +13,11 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
             field: 'owner_id'
         },
+        name: {
+            allowNull: false,
+            type: Sequelize.STRING,
+            field: 'activ_name'
+        },
         description: {
             allowNull: false,
             type: Sequelize.STRING,

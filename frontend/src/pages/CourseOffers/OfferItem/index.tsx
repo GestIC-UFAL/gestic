@@ -1,26 +1,11 @@
 import * as React from 'react';
-import { Box, Heading, Text, IconButton, Center } from '@chakra-ui/react';
+import { Box, Heading, Text, IconButton, Center, Table, Thead, Tr, Th, Tbody, Td, Link } from '@chakra-ui/react';
 import { MdModeEdit } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { BsTrashFill } from 'react-icons/bs';
 import { useAuth } from '../../../providers/AuthProvider';
+import { PropsOfferItem } from '../types';
 
-interface offerData {
-  id: string;
-  name: string;
-  code: string;
-  codeClassroom: string;
-  linkClassroom: string;
-  linkMeets: string;
-  linkWpp: string;
-  linkTel: string;
-}
-
-interface PropsOfferItem {
-  offer: offerData;
-  withActions: boolean;
-  clickToRemove(): void;
-}
 
 const OfferItem: React.FC<PropsOfferItem> = ({ offer, clickToRemove = () => {}, withActions = true }) => {
   const { user } = useAuth();
@@ -74,7 +59,7 @@ const OfferItem: React.FC<PropsOfferItem> = ({ offer, clickToRemove = () => {}, 
       <Box mt={3} textAlign="left">
         <Text fontSize="18px">
           <b>Link classroom: </b>
-          {`${offer.linkClassroom}h`}
+          {offer.linkClassroom}
         </Text>
       </Box>
 
@@ -97,6 +82,50 @@ const OfferItem: React.FC<PropsOfferItem> = ({ offer, clickToRemove = () => {}, 
           <b>Link meet: </b>
           {offer.linkMeets}
         </Text>
+      </Box>
+
+      <Box mt={3} textAlign="left">
+        <Text fontSize="18px" display="flex" alignItems="center" justifyContent="center">
+          <b>Horários</b>
+        </Text>
+        {offer.timetables.length !== 0 ? (
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Dia</Th>
+                <Th>Início</Th>
+                <Th>Fim</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {offer.timetables.map(timetable => {
+                return (
+                  <Link key={timetable.id} as={Tr} href={`ofertas-disciplinas/show/${timetable.id}`}>
+                    <Td>
+                      <Link display="block" href={`ofertas-disciplinas/show/${timetable.id}`}>
+                        {timetable.weekday}
+                      </Link>
+                    </Td>
+                    <Td>
+                      <Link display="block" href={`ofertas-disciplinas/show/${timetable.id}`}>
+                        {timetable.start_time}
+                      </Link>
+                    </Td>
+                    <Td>
+                      <Link display="block" href={`ofertas-disciplinas/show/${timetable.id}`}>
+                        {timetable.end_time}
+                      </Link>
+                    </Td>
+                  </Link>
+                );
+              })}
+            </Tbody>
+          </Table>
+        ) : (
+          <Text display="flex" alignItems="center" justifyContent="center">
+            Não existem horários cadastrados
+          </Text>
+        )}
       </Box>
     </Box>
   );

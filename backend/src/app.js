@@ -25,6 +25,7 @@ app.use('/access', routes.access);
 app.use('/user', routes.user);
 app.use('/project', routes.project);
 app.use('/offer', routes.offer);
+app.use('/timetable', routes.timetable);
 app.use('/informative', routes.informative);
 app.use('/research', routes.research);
 app.use('/event', routes.event);

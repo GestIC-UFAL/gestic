@@ -2,7 +2,7 @@ import { Input, FormControl, FormErrorMessage, FormLabel, FormHelperText } from 
 import * as React from 'react';
 
 type Props = {
-  type: 'email' | 'password' | 'text';
+  type: 'email' | 'password' | 'text' | 'time';
   name: string;
   placeholder: string;
   ref?: any;

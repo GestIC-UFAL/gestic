@@ -5,6 +5,7 @@ import { GruposPesquisaItemPage, GruposPesquisaList, GruposPesquisaNewEdit } fro
 import { InformativeItemPage, InformativeList, InformativeNewEdit } from '../pages/Informative';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import ComplementaryActivities from '../pages/ComplementaryActivities';
 import Profile from '../pages/Profile';
 import ForgotPassword from '../pages/ForgotPassword';
 import { UsefulInformationsPage, EmailListPage } from '../pages/UsefulInformations';
@@ -137,6 +138,12 @@ export const routes = [
   {
     path: '/register',
     component: SignUp,
+    private: false,
+    roles: [],
+  },
+  {
+    path: '/complementary-actvities',
+    component: ComplementaryActivities,
     private: false,
     roles: [],
   },

@@ -1,11 +1,11 @@
 {
   "research": {
-    "create": ["COOR", "TEC", "PROF"],
-    "edit": ["TEC", "COOR"]
+    "create": ["MONIT", "COOR", "TEC", "PROF"],
+    "edit": ["MONIT", "TEC", "COOR"]
   },
   "project": {
-    "create": ["COOR", "TEC", "PROF"],
-    "edit": ["TEC", "COOR"]
+    "create": ["MONIT", "COOR", "TEC", "PROF"],
+    "edit": ["MONIT", "TEC", "COOR"]
   },
   "informative": {
     "create": ["COOR", "TEC", "PROF"],
@@ -18,7 +18,7 @@
   },
   "user": ["TEC", "COOR"],
   "event": {
-    "create": ["COOR", "TEC"],
-    "edit": ["COOR", "TEC"]
+    "create": ["MONIT", "COOR", "TEC"],
+    "edit": ["MONIT", "COOR", "TEC"]
   }
 }

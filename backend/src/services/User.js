@@ -78,13 +78,27 @@ class User {
         name,
         email,
         password,
+        perfil,
+        title,
     }) => {
         try {
-            const profile = await db.profile.findOne({
-                where: {
-                    tag: 'ALUN'
-                }
-            });
+            var profile = undefined;
+            if(perfil == "Estudante"){
+                profile = await db.profile.findOne({
+                    where: {
+                        tag: 'ALUN'
+                    }
+                });
+            }
+            if(perfil == "Monitor"){
+                console.log("Perfil: " + perfil+ "|");
+                profile = await db.profile.findOne({
+                    where: {
+                        tag: 'MONIT'
+                    }
+                });
+            }
+            
             if (!profile) throw new Error('Invalid tag.');
 
             const user = await db.user.findOne({

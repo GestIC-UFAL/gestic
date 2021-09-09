@@ -2,11 +2,19 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    const uuid = require('uuid');
     return await queryInterface.bulkInsert('profiles', [
       {
         prof_id: '3a2744c1-fa73-43f1-bceb-a8cee76e5f35',
         prof_tag: 'ALUN',
         prof_name: 'ALUNO',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        prof_id: uuid.v4(),
+        prof_tag: 'MONIT',
+        prof_name: 'MONITOR',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

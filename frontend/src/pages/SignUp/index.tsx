@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 
 import { useHistory } from 'react-router-dom';
 
-import { useToast, Box, Button, Stack, Text, Link } from '@chakra-ui/react';
+import { useToast, Box, Button, Stack, Text, Link, FormLabel, FormControl } from '@chakra-ui/react';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,8 +22,10 @@ const schema = yup.object().shape({
 type SignUpFormInputs = {
   name: string;
   surname: string;
+  perfil: string;
   email: string;
   password: string;
+  title: string;
 };
 
 const SignUp = () => {
@@ -37,12 +39,14 @@ const SignUp = () => {
 
   const { errors } = formState;
 
-  const onSubmit = async ({ name, surname, email, password }: SignUpFormInputs) => {
+  const onSubmit = async ({ name, surname, email, password, perfil, title}: SignUpFormInputs) => {
     try {
       await api.post('/access/register', {
         name: `${name} ${surname}`,
         email,
         password,
+        perfil,
+        title,
       });
 
       toast({
@@ -90,6 +94,31 @@ const SignUp = () => {
               defaultValue=""
               render={({ field }) => (
                 <CustomInput {...field} type="text" placeholder="Sobrenome" errorMessage={errors?.surname?.message} />
+              )}
+            />
+
+            <Controller
+              name="title"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <CustomInput {...field} type="text" placeholder="Titulo" errorMessage={errors?.surname?.message} />
+              )}
+            />
+
+            <Controller
+              name="perfil"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl isInvalid={!!errors?.surname?.message} errortext={errors?.surname?.message}>
+                  <FormLabel htmlFor={field.name}>Perfil</FormLabel>
+                  <select value= {field.value} onChange = {field.onChange}> 
+                    <option value="Estudante">Estudante</option>
+                    <option value="Monitor">Monitor</option>
+                  </select>
+                </FormControl>
+
               )}
             />
 

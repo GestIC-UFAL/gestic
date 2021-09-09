@@ -5,6 +5,7 @@ import { GruposPesquisaItemPage, GruposPesquisaList, GruposPesquisaNewEdit } fro
 import { InformativeItemPage, InformativeList, InformativeNewEdit } from '../pages/Informative';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import ComplementaryActivities from '../pages/ComplementaryActivities';
 import Profile from '../pages/Profile';
 import ForgotPassword from '../pages/ForgotPassword';
 import { UsefulInformationsPage, EmailListPage } from '../pages/UsefulInformations';
@@ -12,6 +13,7 @@ import { Calendar, EventItemPage, EventList, EventNewEdit } from '../pages/Calen
 import CourseOffers from '../pages/CourseOffers';
 import CourseOffersShow from '../pages/CourseOffers/OfferShow';
 import OfferNewEdit from '../pages/CourseOffers/OfferNewEdit';
+import OfferTimetableEdit from '../pages/CourseOffers/OfferTimetableNewEdit';
 
 export const routes = [
   {
@@ -41,6 +43,18 @@ export const routes = [
   {
     path: '/ofertas-disciplinas/edit/:id',
     component: OfferNewEdit,
+    private: true,
+    roles: [],
+  },
+  {
+    path: '/ofertas-disciplinas/show/:id_offer/timetable-edit/:id_timetable',
+    component: OfferTimetableEdit,
+    private: true,
+    roles: [],
+  },
+  {
+    path: '/ofertas-disciplinas/show/:id_offer/timetable-new',
+    component: OfferTimetableEdit,
     private: true,
     roles: [],
   },
@@ -124,6 +138,12 @@ export const routes = [
   {
     path: '/register',
     component: SignUp,
+    private: false,
+    roles: [],
+  },
+  {
+    path: '/complementary-actvities',
+    component: ComplementaryActivities,
     private: false,
     roles: [],
   },

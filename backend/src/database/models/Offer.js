@@ -63,6 +63,10 @@ module.exports = (sequelize, Sequelize) => {
             foreignKey: 'owner',
             as: 'ownerInfo',
         });
+        Offer.hasMany(models.ClassTimetable, {
+            foreignKey: 'offer_id',
+            as: "timetables"
+        })
     };
 
     return Offer;

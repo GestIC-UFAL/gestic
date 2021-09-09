@@ -45,7 +45,12 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const result = await offerService.getById({ ...req.params });
+        const result = await offerService.getById({ 
+            ...req.params, 
+            options: { 
+                include: ["timetables"]
+            }
+        });
         res.status(200).json(result);
     } catch (err) {
         console.log(err);

@@ -39,7 +39,7 @@ const OfferEdit = () => {
 
   const [isLargerThan766] = useMediaQuery('(max-width: 766px)');
   const history = useHistory();
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const toast = useToast();
@@ -50,7 +50,13 @@ const OfferEdit = () => {
       const { data } = await api.get(`/offer/${id}`);
       reset(data);
     } catch (err) {
-      console.error(err);
+      toast({
+        title: 'Erro getOffer',
+        status: 'error',
+        position: 'top-right',
+        isClosable: true,
+        description: JSON.stringify(err),
+      });
     } finally {
       setIsLoading(false);
     }
@@ -93,7 +99,7 @@ const OfferEdit = () => {
     <Page>
       <Box p={8} pt={isLargerThan766 ? 10 : 8} maxW={isLargerThan766 ? '100%' : '60vw'}>
         <Heading color="teal" mb={6}>
-          {id ? 'Editar' : 'Novo'} Oferta
+          {id ? 'Editar' : 'Nova'} Oferta
         </Heading>
         {isLoading && id ? (
           <Box textAlign={isLoading ? 'center' : 'inherit'}>

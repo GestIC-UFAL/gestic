@@ -25,13 +25,14 @@ app.use('/access', routes.access);
 app.use('/user', routes.user);
 app.use('/project', routes.project);
 app.use('/offer', routes.offer);
+app.use('/timetable', routes.timetable);
 app.use('/informative', routes.informative);
 app.use('/research', routes.research);
 app.use('/event', routes.event);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.get('/', verifyJWT, (req, res) => {
-    res.send("Bem vindo a versão V0.0 do backend da aplicação GestIC!");
+    res.send("Bem vindo a versão V0.0 do backend da aplicação GestIC - Taurus!");
 });
 
 module.exports = app;

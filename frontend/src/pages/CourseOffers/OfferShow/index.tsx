@@ -19,17 +19,7 @@ import { useAuth } from '../../../providers/AuthProvider';
 import { Page } from '../../../components/Page';
 import { api } from '../../../services/api';
 import OfferItem from '../OfferItem';
-
-interface offerData {
-  id: string;
-  name: string;
-  code: string;
-  codeClassroom: string;
-  linkClassroom: string;
-  linkMeets: string;
-  linkWpp: string;
-  linkTel: string;
-}
+import { offerData } from '../types';
 
 const OfferShow = () => {
   const [isLargerThan766] = useMediaQuery('(max-width: 766px)');

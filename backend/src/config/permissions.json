@@ -16,6 +16,11 @@
     "edit": ["TEC", "COOR"],
     "deleteAll": ["TEC", "COOR"]
   },
+  "ClassTimetable": {
+    "create": ["COOR", "TEC", "PROF", "ALUN"],
+    "edit": ["TEC", "COOR", "ALUN"],
+    "deleteAll": ["TEC", "COOR"]
+  },
   "user": ["TEC", "COOR"],
   "event": {
     "create": ["MONIT", "COOR", "TEC"],

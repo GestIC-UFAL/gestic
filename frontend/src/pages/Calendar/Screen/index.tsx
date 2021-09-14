@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Box, Button, Heading, Link, useMediaQuery } from '@chakra-ui/react';
-import { Page } from '../../../components/Page';
-import { api } from '../../../services/api';
+import { AddIcon } from '@chakra-ui/icons';
 import { useHistory } from 'react-router';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import { AddIcon } from '@chakra-ui/icons';
+import { Page } from '../../../components/Page';
 import { useAuth } from '../../../providers/AuthProvider';
 
 const localizer = momentLocalizer(moment);

@@ -15,7 +15,7 @@ import {
   Spinner,
   InputRightElement,
   Text,
-  useMediaQuery,
+  useToast,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
@@ -40,13 +40,14 @@ interface dataType {
 
 const DisciplineOffer = () => {
   const history = useHistory();
-  const [isLargerThan766] = useMediaQuery('(max-width: 766px)');
 
   const [disciplines, setADisciplines] = React.useState<dataType[]>([]);
   const [disciplinesSearch, setDisciplinesSearch] = React.useState<dataType[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
   const { user } = useAuth();
+
+  const toast = useToast();
 
   const getAllDisciplines = async () => {
     setIsLoading(true);
@@ -56,7 +57,7 @@ const DisciplineOffer = () => {
       setADisciplines(data);
       setDisciplinesSearch(data);
     } catch (err) {
-      console.error(err);
+      toast({ description: JSON.stringify(err), status: 'error', position: 'top-right' });
     } finally {
       setIsLoading(false);
     }
@@ -66,11 +67,7 @@ const DisciplineOffer = () => {
     getAllDisciplines();
   }, []);
 
-  // const goToPage = (id: string | number) => {
-  //   history.push(`ofertas-disciplinas/show/${id}`);
-  // };
-
-  const handleChange = event => {
+  const handleChange = (event: { target: { value: string } }) => {
     const { value } = event.target;
     if (disciplines.length) {
       if (value) {
@@ -95,16 +92,22 @@ const DisciplineOffer = () => {
             <Heading color="teal" textAlign="center" mr={2}>
               Oferta de Disciplinas
             </Heading>
-            {user && (
-              <Button
-                leftIcon={<AddIcon />}
-                onClick={() => history.push('ofertas-disciplinas/new')}
-                colorScheme="teal"
-                variant="outline"
-              >
-                Criar novo
+            <Box display="flex" mb={4} alignItems="center" justifyContent="left">
+              <Button onClick={() => history.push('montar-horario')} colorScheme="teal" variant="outline">
+                Montar horário
               </Button>
-            )}
+              {user && (
+                <Button
+                  leftIcon={<AddIcon />}
+                  onClick={() => history.push('ofertas-disciplinas/new')}
+                  colorScheme="teal"
+                  variant="outline"
+                  ml="1"
+                >
+                  Criar novo
+                </Button>
+              )}
+            </Box>
           </Box>
 
           <Box minW="20%" w="25%" mb={user ? 6 : 0}>

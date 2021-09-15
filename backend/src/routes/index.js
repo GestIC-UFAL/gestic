@@ -6,6 +6,7 @@ const access = require('./access');
 const informative = require('./Informative.js');
 const research = require('./Research');
 const event = require('./Event');
+const complementary = require('./ComplementaryActivities');
 
 module.exports = {
     user,
@@ -16,4 +17,5 @@ module.exports = {
     informative,
     research,
     event,
+    complementary
 };

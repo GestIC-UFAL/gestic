@@ -5,6 +5,7 @@ const ClassTimetableService = require('./ClassTimetable');
 const InformativeService = require('./Informative');
 const ResearchGroupService = require('./Research');
 const EventService = require('./Event');
+const ComplementaryService = require('./ComplementaryActivities');
 
 module.exports = {
     UserService,
@@ -14,4 +15,5 @@ module.exports = {
     InformativeService,
     ResearchGroupService,
     EventService,
+    ComplementaryService,
 }

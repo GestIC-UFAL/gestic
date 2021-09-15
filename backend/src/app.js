@@ -29,6 +29,7 @@ app.use('/timetable', routes.timetable);
 app.use('/informative', routes.informative);
 app.use('/research', routes.research);
 app.use('/event', routes.event);
+app.use('/complementary', routes.complementary);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.get('/', verifyJWT, (req, res) => {

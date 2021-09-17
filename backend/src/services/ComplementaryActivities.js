@@ -10,7 +10,6 @@ class ComplementaryAcivities extends Service {
 
     async insert({ token, ownerId, name, description,
         group, hours, start, end}) {
-        console.log(">>>>"+ownerId)
         try {
             await super.insert({ token });
             const complementaryActivity = await this.db.create({
@@ -24,6 +23,20 @@ class ComplementaryAcivities extends Service {
                 end
             });
             return complementaryActivity;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async deleteActivity({token, id}) {
+        try {
+            await this.userService.verifyUserProfile({
+                token, validProfileTags: this.allwdProf.edit });
+
+            const complementaryActivities = await this.db.findByPk(id);
+            if (!complementaryActivities) throw new Error('User not found.');
+            await complementaryActivities.destroy()
+            return complementaryActivities;
         } catch (err) {
             throw err;
         }

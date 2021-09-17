@@ -30,4 +30,17 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.delete('/:id', verifyJWT, async (req, res) => {
+    try {
+        const result = await complementaryService.deleteActivity({
+            ...req.params, token: req.token });
+        res.status(200).json(result);
+    } catch (err) {
+        console.log(err);
+        (err.code) ?
+            res.status(500).json({ message: "Server Internal Error." }) :
+            res.status(500).json({ message: err.message });
+    }
+})
+
 module.exports = router;

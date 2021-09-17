@@ -3,6 +3,10 @@
     "create": ["MONIT", "COOR", "TEC", "PROF"],
     "edit": ["MONIT", "TEC", "COOR"]
   },
+  "complementary_activities": {
+    "create": ["MONIT", "COOR", "TEC", "PROF"],
+    "edit": ["MONIT", "TEC", "COOR"]
+  },
   "project": {
     "create": ["MONIT", "COOR", "TEC", "PROF"],
     "edit": ["MONIT", "TEC", "COOR"]

@@ -5,10 +5,10 @@ const express = require('express');
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/',verifyJWT, async (req, res) => {
     try {
         const result = await complementaryService.insert({
-            ...req.body, token: req.token, ownerId: req.userId});
+            ...req.body, token: req.token,});
         res.status(200).json(result);
     } catch (err) {
         console.log(err);

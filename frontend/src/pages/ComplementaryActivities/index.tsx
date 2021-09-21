@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 
 import { useHistory } from 'react-router-dom';
 
-import { useToast, Box, Button, Stack, Text, Link } from '@chakra-ui/react';
+import { useToast, Box, Button, Stack, Text, Link, useOutsideClick } from '@chakra-ui/react';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,23 +11,33 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as E from './styles';
 import { CustomInput } from '../../components/CustomInput';
 import { api } from '../../services/api';
+// import { usersMock } from '../../services/mocks';
+import { useAuth } from '../../providers/AuthProvider';
+
+
 
 const schema = yup.object().shape({
   name: yup.string().required('Nome é obrigatório'),
-  surname: yup.string().required('Sobrenome é obrigatório'),
-  email: yup.string().email('Digite um email válido').required('Email é obrigatório'),
-  password: yup.string().required('Senha é obrigatória'),
+  description: yup.string().required('Description é obrigatório'),
+  group: yup.string().required('Grupo é obrigatório'),
+  hours: yup.string().required('Horas é obrigatório'),
+  start: yup.string().required('Início de Atividades é obrigatório'),
+  end: yup.string().required('Término de Atividades é obrigatório'),
 });
 
-type SignUpFormInputs = {
+type complementaryInputs = {
+  owner: string
+  id: string;
   name: string;
-  surname: string;
-  email: string;
-  password: string;
+  description: string;
+  group: string;
+  hours: string;
+  start: string;
+  end: string;
 };
 
 const ComplementaryActivities = () => {
-  const { handleSubmit, formState, control } = useForm<SignUpFormInputs>({
+  const { handleSubmit, formState, control } = useForm<complementaryInputs>({
     reValidateMode: 'onBlur',
     resolver: yupResolver(schema),
   });
@@ -37,26 +47,37 @@ const ComplementaryActivities = () => {
 
   const { errors } = formState;
 
-  const onSubmit = async ({ name, surname, email, password }: SignUpFormInputs) => {
+  const { user } = useAuth();
+
+
+  //
+  
+  //
+
+  const onSubmit = async ({ name, description, group, hours, start, end}: complementaryInputs) => {
     try {
-      await api.post('/access/register', {
-        name: `${name} ${surname}`,
-        email,
-        password,
+      await api.post('/complementary', {
+        ownerId: user.id,
+        name,
+        description,
+        group,
+        hours,
+        start,
+        end
       });
 
       toast({
         title: 'Cadastro realizado com sucesso',
-        description: 'Você pode realizar o acesso agora',
+        description: 'Você pode consultar as atividades agora',
         status: 'success',
         position: 'top-right',
         isClosable: true,
       });
 
-      push('/login', {
-        email,
-        password,
-      });
+      // push('/login', {
+      //   email,
+      //   password,
+      // });
     } catch {
       toast({
         title: 'Ocorreu um erro ao fazer o cadastro na plataforma',
@@ -78,55 +99,65 @@ const ComplementaryActivities = () => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <CustomInput {...field} type="text" placeholder="Atividade 1" errorMessage={errors?.name?.message} />
+                <CustomInput {...field} type="text" placeholder="Atividade" errorMessage={errors?.name?.message} />
               )}
             />
 
             <Box my={2} />
 
             <Controller
-              name="surname"
+              name="description"
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <CustomInput {...field} type="text" placeholder="Descrição da Atividade 1" errorMessage={errors?.surname?.message} />
+                <CustomInput {...field} type="text" placeholder="Descrição da Atividade" errorMessage={errors?.surname?.message} />
               )}
             />
 
             <Box my={2} />
 
             <Controller
-              name="email"
+              name="group"
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <CustomInput {...field} type="email" placeholder="Carga Horária" errorMessage={errors?.email?.message} />
+                <CustomInput {...field} type="text" placeholder="Grupo" errorMessage={errors?.group?.message} />
               )}
             />
             <Box my={2} />
 
             <Controller
-              name="email"
+              name="hours"
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <CustomInput {...field} type="email" placeholder="Ano" errorMessage={errors?.email?.message} />
+                <CustomInput {...field} type="text" placeholder="Carga Horária" errorMessage={errors?.hours?.message} />
               )}
             />
             <Box my={2} />
 
             <Controller
-              name="email"
+              name="start"
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <CustomInput {...field} type="email" placeholder="Semestre" errorMessage={errors?.email?.message} />
+                <CustomInput {...field} type="text" placeholder="Data de Início da Atividade" errorMessage={errors?.start?.message} />
+              )}
+            />
+            <Box my={2} />
+
+            <Controller
+              name="end"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <CustomInput {...field} type="text" placeholder="Data de Término da Atividade" errorMessage={errors?.end?.message} />
               )}
             />
           </Stack>
 
           <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column">
-            <Button
+            {/* <Button
               mt={7}
               width="100%"
               colorScheme="teal"
@@ -138,7 +169,7 @@ const ComplementaryActivities = () => {
             >
               Adicionar outra Atividade Complementar
             </Button>
-            <Box my={2} />
+            <Box my={2} /> */}
             
             <Button
               mt={7}
@@ -153,10 +184,10 @@ const ComplementaryActivities = () => {
               Cadastrar Atividades Complementares
             </Button>
 
-            <Text mt={5}>Já possui uma conta?</Text>
-            <Link color="teal.500" href="/login" mt={2}>
+            {/* <Text mt={5}>Já possui uma conta?</Text>
+            <Link color="teal.500" href="/complementary" mt={2}>
               Fazer login agora
-            </Link>
+            </Link> */}
           </Box>
         </form>
       </E.Box>

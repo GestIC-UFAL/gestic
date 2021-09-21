@@ -15,6 +15,7 @@ import CourseOffers from '../pages/CourseOffers';
 import CourseOffersShow from '../pages/CourseOffers/OfferShow';
 import OfferNewEdit from '../pages/CourseOffers/OfferNewEdit';
 import OfferTimetableEdit from '../pages/CourseOffers/OfferTimetableNewEdit';
+import MontarHorario from '../pages/MontarHorario';
 
 export const routes = [
   {
@@ -181,6 +182,12 @@ export const routes = [
   {
     path: '/calendario',
     component: Calendar,
+    private: false,
+    roles: [],
+  },
+  {
+    path: '/montar-horario',
+    component: MontarHorario,
     private: false,
     roles: [],
   },

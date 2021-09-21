@@ -61,6 +61,24 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, [history]);
 
+  // Invalid Token Interceptor
+  api.interceptors.response.use(
+    function res(response) {
+      // Any status code that lie within the range of 2xx cause this function to trigger
+      return response;
+    },
+    function err(error) {
+      // Any status codes that falls outside the range of 2xx cause this function to trigger
+      if (error.response && error.response.data) {
+        /*eslint no-alert: "off"*/
+        alert('Token Inválido. Realize o login novamente.');
+        if (error.response.data.auth === false) signOut();
+      }
+
+      return Promise.reject(error);
+    },
+  );
+
   const updateUser = useCallback(
     (user: User) => {
       localStorage.setItem('@GestIC:user', JSON.stringify(user));

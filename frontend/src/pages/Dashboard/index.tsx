@@ -77,6 +77,24 @@ const Dashboard = () => {
                   </Heading>
                 </Box>
               </Link>
+              <Link color="white" href="/complementary-activities/list" _focus={{ boxShadow: 'none' }}>
+                <Box mb={2} p="1px" bgColor="teal">
+                  <Box
+                    border="1px"
+                    bgColor="teal"
+                    borderColor="white"
+                    p={4}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Icon as={AiOutlineUnorderedList} fontSize="2rem" mr={2} />
+                    <Heading fontSize="md" textTransform="uppercase">
+                      Atividades Complementares
+                    </Heading>
+                  </Box>
+                </Box>
+              </Link>
             </Box>
           )}
         </SimpleGrid>

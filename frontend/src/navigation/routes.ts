@@ -143,13 +143,13 @@ export const routes = [
     roles: [],
   },
   {
-    path: '/complementary-actvities',
+    path: '/complementary-activities',
     component: ComplementaryActivities,
     private: false,
     roles: [],
   },
   {
-    path: '/complementary-actvities/list',
+    path: '/complementary-activities/list',
     component: ComplementaryActivities2,
     private: false,
     roles: [],

@@ -98,7 +98,7 @@ const ComplementaryActivities = () => {
             {user && (
               <Button
                 leftIcon={<AddIcon />}
-                onClick={() => history.push('/complementary-actvities')}
+                onClick={() => history.push('/complementary-activities')}
                 colorScheme="teal"
                 variant="outline"
               >

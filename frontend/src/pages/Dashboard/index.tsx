@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, SimpleGrid, Icon, Heading, Link, useMediaQuery } from '@chakra-ui/react';
-import { AiOutlineFundProjectionScreen, AiOutlineUnorderedList } from 'react-icons/ai';
+import { AiOutlineFundProjectionScreen, AiOutlineUnorderedList, AiFillSchedule } from 'react-icons/ai';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import { BiGroup } from 'react-icons/bi';
 import { IoMdInformationCircleOutline } from 'react-icons/io';
@@ -75,6 +75,24 @@ const Dashboard = () => {
                   <Heading fontSize="md" textTransform="uppercase">
                     Ofertas de disciplina
                   </Heading>
+                </Box>
+              </Link>
+              <Link color="white" href="/montar-horario" _focus={{ boxShadow: 'none' }}>
+                <Box mb={2} p="1px" bgColor="teal">
+                  <Box
+                    border="1px"
+                    bgColor="teal"
+                    borderColor="white"
+                    p={4}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Icon as={AiFillSchedule} fontSize="2rem" mr={2} />
+                    <Heading fontSize="md" textTransform="uppercase">
+                      Montar Horário
+                    </Heading>
+                  </Box>
                 </Box>
               </Link>
             </Box>

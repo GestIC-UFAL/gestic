@@ -27,6 +27,10 @@ interface activityData {
   id: string;
   name: string;
   description: string;
+  group: string;
+  hours: string;
+  start: string;
+  end: string;
 }
 
 // const data: activityData[] = [
@@ -77,7 +81,11 @@ const ComplementaryActivities = () => {
           return (
             activity?.owner?.toLowerCase().includes(value.toLowerCase()) ||
             activity?.name?.toLowerCase().includes(value.toLowerCase()) ||
-            activity?.description?.toLowerCase().includes(value.toLowerCase())
+            activity?.description?.toLowerCase().includes(value.toLowerCase() ||
+            activity?.group?.toLowerCase().includes(value.toLowerCase()) ||
+            activity?.hours?.toLowerCase().includes(value.toLowerCase()) ||
+            activity?.start?.toLowerCase().includes(value.toLowerCase()) ||
+            activity?.end?.toLowerCase().includes(value.toLowerCase()))
           );
         });
         setActivitiesSearch(newActivities);
@@ -123,6 +131,10 @@ const ComplementaryActivities = () => {
                 <Th>Aluno</Th>
                 <Th>Atividade</Th>
                 <Th>Descrição</Th>
+                <Th>Grupo</Th>
+                <Th>Horas</Th>
+                <Th>Início</Th>
+                <Th>Fim</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -136,6 +148,10 @@ const ComplementaryActivities = () => {
                       </Link>
                     </Td>
                     <Td>{activity.description}</Td>
+                    <Td>{activity.group}</Td>
+                    <Td>{activity.hours}</Td>
+                    <Td>{activity.start}</Td>
+                    <Td>{activity.end}</Td>
                   </Tr>
                 );
               })}

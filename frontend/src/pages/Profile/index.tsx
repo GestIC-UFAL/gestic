@@ -38,6 +38,8 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Confirmação incorreta'),
 });
 
+
+
 type ProfileFormInputs = {
   name: string;
   email: string;
@@ -61,6 +63,7 @@ const Profile = () => {
   const { errors } = formState;
 
   const onSubmit = async (data: ProfileFormInputs) => {
+    console.log(user);
     try {
       const response = await api.put('/user', {
         id: user.id,
@@ -93,7 +96,36 @@ const Profile = () => {
     <Page>
       <E.Container>
         <E.Box>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <E.Subheader>
+            <E.colorblock/>
+            <E.Pa>Painel de Usuário</E.Pa>
+            </E.Subheader>
+          <E.Flex> 
+            <E.BoxDiv1>
+              <E.Image src="https://bit.ly/sage-adebayo"/>
+              <E.User>Benjamin Ribeiro
+                {/* {user.name} */}
+                </E.User>
+              <E.Info>Professor</E.Info>
+            </E.BoxDiv1>
+            <E.BoxDiv2>
+              <E.Boxinside>
+              <E.Title>Ocupação
+                    {/* {user.name} */}
+                    </E.Title>
+                  <E.Info1>Bolsista EDGE</E.Info1>
+                  <E.Title>Posts Curtidos
+                    {/* {user.name} */}
+                    </E.Title>
+                  <E.Info>Total: 25</E.Info>
+
+              </E.Boxinside>
+              <E.Button>Alterar Senha</E.Button>
+            </E.BoxDiv2>
+          </E.Flex>
+
+
+          {/* <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2}>
               <Controller
                 name="name"
@@ -170,7 +202,7 @@ const Profile = () => {
                 Confirmar mudanças
               </Button>
             </Box>
-          </form>
+          </form> */}
         </E.Box>
       </E.Container>
     </Page>

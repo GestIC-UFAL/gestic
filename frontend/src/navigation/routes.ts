@@ -6,6 +6,7 @@ import { InformativeItemPage, InformativeList, InformativeNewEdit } from '../pag
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import ComplementaryActivities from '../pages/ComplementaryActivities';
+import ComplementaryActivities2 from '../pages/ComplementaryActivities2';
 import Profile from '../pages/Profile';
 import ForgotPassword from '../pages/ForgotPassword';
 import { UsefulInformationsPage, EmailListPage } from '../pages/UsefulInformations';
@@ -144,6 +145,12 @@ export const routes = [
   {
     path: '/complementary-actvities',
     component: ComplementaryActivities,
+    private: false,
+    roles: [],
+  },
+  {
+    path: '/complementary-actvities/list',
+    component: ComplementaryActivities2,
     private: false,
     roles: [],
   },

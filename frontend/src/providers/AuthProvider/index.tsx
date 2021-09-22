@@ -3,6 +3,8 @@ import { useHistory } from 'react-router';
 import { api } from '../../services/api';
 
 interface User {
+  title: string;
+  image_id: string;
   id: string;
   name: string;
   email: string;

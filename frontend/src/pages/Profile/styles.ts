@@ -91,7 +91,7 @@ export const Image = styled(ImageUI)`
   background: blue;
   border-radius: 100%;
   margin-top: 20px;
-  background: yellow;
+  background: #9DECF9;
   align-items: center;
 `;
 

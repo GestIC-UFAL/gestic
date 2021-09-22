@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as E from './styles';
 import { CustomInput } from '../../components/CustomInput';
 import { api } from '../../services/api';
+import { useRef } from 'react';
 
 const schema = yup.object().shape({
   name: yup.string().required('Nome é obrigatório'),
@@ -22,7 +23,7 @@ const schema = yup.object().shape({
 type SignUpFormInputs = {
   name: string;
   surname: string;
-  perfil: string;
+  profile: string;
   email: string;
   password: string;
   title: string;
@@ -33,22 +34,35 @@ const SignUp = () => {
     reValidateMode: 'onBlur',
     resolver: yupResolver(schema),
   });
+  const [profile,setProfile] = React.useState('Estudante');
+  const filesElement = useRef(null);
 
   const { push } = useHistory();
   const toast = useToast();
 
   const { errors } = formState;
 
-  const onSubmit = async ({ name, surname, email, password, perfil, title}: SignUpFormInputs) => {
+  const onSubmit = async ({ name, surname, email, password, title}: SignUpFormInputs) => {
+    console.log(profile);
+    const dataForm = new FormData();
+    const file = filesElement?.current?.files[0];
+    dataForm.append('file', file);
+    console.log(file);
     try {
-      await api.post('/access/register', {
+      
+      api.post('/access/register', {
         name: `${name} ${surname}`,
         email,
         password,
-        perfil,
+        profile: profile,
         title,
+      }).then((response)=>{
+        console.log(response.data.id);
+        dataForm.append('user_id',response.data.id);
+        api.post('/access/register/file', dataForm);
       });
-
+      
+      
       toast({
         title: 'Cadastro realizado com sucesso',
         description: 'Você pode realizar o acesso agora',
@@ -107,13 +121,13 @@ const SignUp = () => {
             />
 
             <Controller
-              name="perfil"
+              name="profile"
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <FormControl isInvalid={!!errors?.surname?.message} errortext={errors?.surname?.message}>
-                  <FormLabel htmlFor={field.name}>Perfil</FormLabel>
-                  <select value= {field.value} onChange = {field.onChange}> 
+                <FormControl isInvalid={!!errors?.profile?.message} errortext={errors?.profile?.message}>
+                  <FormLabel htmlFor={field.name}>profile</FormLabel>
+                  <select value= {profile} onChange = {(event) =>setProfile(event.target.value)}> 
                     <option value="Estudante">Estudante</option>
                     <option value="Monitor">Monitor</option>
                   </select>
@@ -149,6 +163,8 @@ const SignUp = () => {
                 />
               )}
             />
+              <h4>Imagem perfil:</h4>
+             <input type="file" multiple ref={filesElement} />
           </Stack>
 
           <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column">

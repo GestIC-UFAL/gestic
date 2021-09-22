@@ -78,21 +78,20 @@ class User {
         name,
         email,
         password,
-        perfil,
+        profile,
         title,
     }) => {
         try {
-            var profile = undefined;
-            if(perfil == "Estudante"){
-                profile = await db.profile.findOne({
+            var requestProfile = undefined;
+            if(profile == "Estudante"){
+                userProfile = await db.profile.findOne({
                     where: {
                         tag: 'ALUN'
                     }
                 });
             }
-            if(perfil == "Monitor"){
-                console.log("Perfil: " + perfil+ "|");
-                profile = await db.profile.findOne({
+            if(profile == "Monitor"){
+                requestProfile = await db.profile.findOne({
                     where: {
                         tag: 'MONIT'
                     }
@@ -112,10 +111,12 @@ class User {
             password = await this._generateHash({ password });
             const createdUser = await db.user.create({
                 id: uuid.v4(),
-                profileId: profile.id,
+                profileId: requestProfile.id,
+                title,
                 name,
                 email,
                 password,
+                
             });
 
             return {
@@ -177,6 +178,7 @@ class User {
         token,
         id,
         idInToken,
+        image_id = undefined,
         name = undefined,
         status = undefined,
         profileId = undefined,
@@ -195,6 +197,7 @@ class User {
             await db.user.update({ 
                 name: name ? name : user.name,
                 status: status ? status : user.status,
+                image_id: image_id ? image_id : user.image_id,
                 profileId: profileId ? profileId : user.profileId,
             }, {
                 where: {

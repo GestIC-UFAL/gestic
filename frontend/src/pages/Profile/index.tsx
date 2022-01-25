@@ -2,7 +2,9 @@ import * as React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
 import {
-  useToast, Button, useDisclosure,
+  useToast,
+  Button,
+  useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -12,7 +14,7 @@ import {
   ModalCloseButton,
   Stack,
   Box,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -51,8 +53,6 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Confirmação incorreta'),
 });
 
-
-
 type ProfileFormInputs = {
   name: string;
   email: string;
@@ -68,13 +68,12 @@ const Profile = () => {
   });
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const mappedTag =  {'MONIT': 'Monitor'};
+  const mappedTag = { MONIT: 'Monitor' };
   const toast = useToast();
 
   const history = useHistory();
 
   const { user, updateUser } = useAuth();
-
 
   const { errors } = formState;
 
@@ -113,28 +112,27 @@ const Profile = () => {
       <E.Container>
         <E.Box>
           <E.Subheader>
-            <E.colorblock/>
+            <E.ColorBlock />
             <E.Pa>Painel de Usuário</E.Pa>
-            </E.Subheader>
-          <E.Flex> 
+          </E.Subheader>
+          <E.Flex>
             <E.BoxDiv1>
-              <E.Image src={image}/>
-              <E.User>
-                {user.name}
-                </E.User>
+              <E.Image src={image} />
+              <E.User>{user.name}</E.User>
               <E.Info>{mappedTag[user.profileTag]}</E.Info>
             </E.BoxDiv1>
             <E.BoxDiv2>
               <E.Boxinside>
-              <E.Title>Ocupação
-                    {/* {user.name} */}
-                    </E.Title>
-                  <E.Info1>{user.title}</E.Info1>
-                  <E.Title>Posts Curtidos
-                    {/* {user.name} */}
-                    </E.Title>
-                  <E.Info>Total: 10</E.Info>
-
+                <E.Title>
+                  Ocupação
+                  {/* {user.name} */}
+                </E.Title>
+                <E.Info1>{user.title}</E.Info1>
+                <E.Title>
+                  Posts Curtidos
+                  {/* {user.name} */}
+                </E.Title>
+                <E.Info>Total: 10</E.Info>
               </E.Boxinside>
               <E.Button onClick={onOpen}>Alterar Dados</E.Button>
 
@@ -144,87 +142,91 @@ const Profile = () => {
                   <ModalHeader>Alterar Dados</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <Stack spacing={2}>
+                        <Controller
+                          name="name"
+                          control={control}
+                          defaultValue={user.name}
+                          render={({ field }) => (
+                            <CustomInput
+                              {...field}
+                              type="text"
+                              placeholder="Nome"
+                              errorMessage={errors?.name?.message}
+                            />
+                          )}
+                        />
 
-                  <form onSubmit={handleSubmit(onSubmit)}>
-                    <Stack spacing={2}>
-                      <Controller
-                        name="name"
-                        control={control}
-                        defaultValue={user.name}
-                        render={({ field }) => (
-                          <CustomInput {...field} type="text" placeholder="Nome" errorMessage={errors?.name?.message} />
-                        )}
-                      />
+                        <Box my={2} />
 
-                      <Box my={2} />
+                        <Box my={2} />
 
-                      <Box my={2} />
+                        <Box my={2} />
 
-                      <Box my={2} />
+                        <Controller
+                          name="old_password"
+                          control={control}
+                          defaultValue=""
+                          render={({ field }) => (
+                            <CustomInput
+                              {...field}
+                              type="password"
+                              name="old_password"
+                              placeholder="Senha antiga"
+                              errorMessage={errors?.old_password?.message}
+                            />
+                          )}
+                        />
 
-                      <Controller
-                        name="old_password"
-                        control={control}
-                        defaultValue=""
-                        render={({ field }) => (
-                          <CustomInput
-                            {...field}
-                            type="password"
-                            name="old_password"
-                            placeholder="Senha antiga"
-                            errorMessage={errors?.old_password?.message}
-                          />
-                        )}
-                      />
+                        <Controller
+                          name="password"
+                          control={control}
+                          defaultValue=""
+                          render={({ field }) => (
+                            <CustomInput
+                              {...field}
+                              type="password"
+                              name="password"
+                              placeholder="Nova senha"
+                              errorMessage={errors?.password?.message}
+                            />
+                          )}
+                        />
 
-                      <Controller
-                        name="password"
-                        control={control}
-                        defaultValue=""
-                        render={({ field }) => (
-                          <CustomInput
-                            {...field}
-                            type="password"
-                            name="password"
-                            placeholder="Nova senha"
-                            errorMessage={errors?.password?.message}
-                          />
-                        )}
-                      />
+                        <Controller
+                          name="password_confirmation"
+                          control={control}
+                          defaultValue=""
+                          render={({ field }) => (
+                            <CustomInput
+                              {...field}
+                              type="password"
+                              name="password_confirmation"
+                              placeholder="Confirmação da senha"
+                              errorMessage={errors?.password_confirmation?.message}
+                            />
+                          )}
+                        />
+                      </Stack>
 
-                      <Controller
-                        name="password_confirmation"
-                        control={control}
-                        defaultValue=""
-                        render={({ field }) => (
-                          <CustomInput
-                            {...field}
-                            type="password"
-                            name="password_confirmation"
-                            placeholder="Confirmação da senha"
-                            errorMessage={errors?.password_confirmation?.message}
-                          />
-                        )}
-                      />
-                    </Stack>
+                      <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column">
+                        <Button
+                          mt={7}
+                          width="100%"
+                          colorScheme="teal"
+                          isLoading={formState.isSubmitting}
+                          type="submit"
+                          display="flex"
+                          alignSelf="end"
+                          disabled={Object.values(errors).length > 0}
+                        >
+                          Confirmar mudanças
+                        </Button>
+                      </Box>
+                    </form>
 
-                    <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column">
-                      <Button
-                        mt={7}
-                        width="100%"
-                        colorScheme="teal"
-                        isLoading={formState.isSubmitting}
-                        type="submit"
-                        display="flex"
-                        alignSelf="end"
-                        disabled={Object.values(errors).length > 0}
-                      >
-                        Confirmar mudanças
-                      </Button>
-                    </Box>
-                  </form>
-
-                  {/* <Controller
+                    {/* <Controller
                     name="password"
                     control={control}
                     defaultValue=""
@@ -276,11 +278,8 @@ const Profile = () => {
                   </ModalFooter>
                 </ModalContent>
               </Modal>
-
-
             </E.BoxDiv2>
           </E.Flex>
-
 
           {/* <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2}>
@@ -370,4 +369,3 @@ export default Profile;
 function componentDidMount() {
   throw new Error('Function not implemented.');
 }
-

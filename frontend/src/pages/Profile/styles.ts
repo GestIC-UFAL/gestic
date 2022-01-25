@@ -1,7 +1,12 @@
 import styled from '@emotion/styled';
 
-import { Box as BoxUI, Flex as FlexUI, Container as ContainerUI, Image as ImageUI, Button as ButtonUI } from '@chakra-ui/react';
-
+import {
+  Box as BoxUI,
+  Flex as FlexUI,
+  Container as ContainerUI,
+  Image as ImageUI,
+  Button as ButtonUI,
+} from '@chakra-ui/react';
 
 export const Container = styled.div`
   display: flex;
@@ -21,29 +26,24 @@ export const Box = styled(BoxUI)`
   height: 700px;
   min-height: 50%;
   max-width: 85%;
-  background: #FFFFFF;
+  background: #ffffff;
   padding: 0px;
   margin-top: -40px;
   border-radius: 14px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
-
-
 `;
 
 export const Flex = styled(FlexUI)`
-
   width: 90%;
   height: 440px;
   align-items: center;
   /* background: red; */
-
 `;
 
-export const colorblock = styled(FlexUI)`
+export const ColorBlock = styled(FlexUI)`
   width: 5%;
   height: 70px;
   background: #008080;
-
 `;
 
 export const Pa = styled(BoxUI)`
@@ -57,12 +57,11 @@ export const Pa = styled(BoxUI)`
   line-height: 28px;
   padding: 1ch;
   color: #000000;
-
 `;
 export const Subheader = styled(FlexUI)`
   width: 100%;
   height: 70px;
-  
+
   background: blue;
   margin-top: -50px;
   margin-bottom: 20px;
@@ -91,7 +90,7 @@ export const Image = styled(ImageUI)`
   background: blue;
   border-radius: 100%;
   margin-top: 20px;
-  background: #9DECF9;
+  background: #9decf9;
   align-items: center;
 `;
 
@@ -149,10 +148,9 @@ export const BoxDiv2 = styled(ContainerUI)`
   width: 40%;
   height: 340px;
   margin: auto;
-  background: #FBFBFB;
+  background: #fbfbfb;
   box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.15);
   border-radius: 14px;
-  
 `;
 
 export const Button = styled(ButtonUI)`
@@ -170,8 +168,5 @@ export const Button = styled(ButtonUI)`
   font-size: 15px;
   line-height: 14px;
 
-  color: #FFFFFF;
-
-
-  
+  color: #ffffff;
 `;

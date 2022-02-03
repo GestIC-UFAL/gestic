@@ -14,7 +14,6 @@ import {
   useMediaQuery,
   Center,
   Spinner,
-  Link,
   Table,
   Tbody,
   Tr,
@@ -28,12 +27,93 @@ import { useAuth } from '../../../providers/AuthProvider';
 import { Page } from '../../../components/Page';
 import { api } from '../../../services/api';
 
+export const ResearchGroupItem = ({
+  researchGroup,
+  clickToRemove = () => {},
+  withActions = true,
+}: {
+  researchGroup: any;
+  clickToRemove: () => void;
+  withActions?: boolean;
+}) => {
+  const history = useHistory();
+  const { user } = useAuth();
+  const { id } = useParams<{ id: string }>();
+
+  return (
+    <Box mt={4} mb={8}>
+      <Box mb={3} display="flex" alignItems="center" justifyContent="space-between">
+        <Heading>{researchGroup.name}</Heading>
+        {user && withActions && (
+          <Box>
+            <IconButton
+              variant="outline"
+              colorScheme="blue"
+              aria-label="Editar"
+              mr={2}
+              icon={<MdModeEdit />}
+              onClick={() => history.push(`/grupos-de-pesquisa/edit/${id}`)}
+            />
+            <IconButton
+              variant="outline"
+              colorScheme="red"
+              aria-label="Remover"
+              onClick={clickToRemove}
+              icon={<BsTrashFill />}
+            />
+          </Box>
+        )}
+      </Box>
+      <Box mt={2} textAlign="left">
+        <Text fontSize="22px">{researchGroup.description}</Text>
+      </Box>
+
+      <Box mt={3} textAlign="left">
+        <Text fontSize="18px">
+          <b>Tipo de pesquisa: </b>
+          {researchGroup.researchType}
+        </Text>
+      </Box>
+
+      <Box mt={3} textAlign="left">
+        <Text fontSize="18px">
+          <b>Atividades e objetivos: </b>
+          {researchGroup.activities}
+        </Text>
+      </Box>
+
+      <Box mt={3} textAlign="left">
+        <Text fontSize="18px">
+          <div>
+            <b>Participantes: </b>
+          </div>
+          {researchGroup.participants && researchGroup.participants.length !== 0 ? (
+            <Table variant="simple">
+              <Tbody>
+                {researchGroup.participants.map((student: any) => {
+                  return (
+                    <Tr key={student.name}>
+                      <Td>{student.name}</Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          ) : (
+            <Text>Não há alunos participando deste projeto ainda.</Text>
+          )}
+        </Text>
+      </Box>
+    </Box>
+  );
+};
+
 const GruposPesquisaItemPage = () => {
   const [isLargerThan766] = useMediaQuery('(max-width: 766px)');
   const history = useHistory();
   const [researchGroup, setResearchGroup] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const toast = useToast();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -132,79 +212,6 @@ const GruposPesquisaItemPage = () => {
         </AlertDialogOverlay>
       </AlertDialog>
     </Page>
-  );
-};
-
-export const ResearchGroupItem = ({ researchGroup, clickToRemove = () => {}, withActions = true }) => {
-  const history = useHistory();
-  const { user } = useAuth();
-  const { id } = useParams();
-
-  return (
-    <Box mt={4} mb={8}>
-      <Box mb={3} display="flex" alignItems="center" justifyContent="space-between">
-        <Heading>{researchGroup.name}</Heading>
-        {user && withActions && (
-          <Box>
-            <IconButton
-              variant="outline"
-              colorScheme="blue"
-              aria-label="Editar"
-              mr={2}
-              icon={<MdModeEdit />}
-              onClick={() => history.push(`/grupos-de-pesquisa/edit/${id}`)}
-            />
-            <IconButton
-              variant="outline"
-              colorScheme="red"
-              aria-label="Remover"
-              onClick={clickToRemove}
-              icon={<BsTrashFill />}
-            />
-          </Box>
-        )}
-      </Box>
-      <Box mt={2} textAlign="left">
-        <Text fontSize="22px">{researchGroup.description}</Text>
-      </Box>
-
-      <Box mt={3} textAlign="left">
-        <Text fontSize="18px">
-          <b>Tipo de pesquisa: </b>
-          {researchGroup.researchType}
-        </Text>
-      </Box>
-
-      <Box mt={3} textAlign="left">
-        <Text fontSize="18px">
-          <b>Atividades e objetivos: </b>
-          {researchGroup.activities}
-        </Text>
-      </Box>
-
-      <Box mt={3} textAlign="left">
-        <Text fontSize="18px">
-          <div>
-            <b>Participantes: </b>
-          </div>
-          {researchGroup.participants && researchGroup.participants.length !== 0 ? (
-            <Table variant="simple">
-              <Tbody>
-                {researchGroup.participants.map(student => {
-                  return (
-                    <Tr key={student.name}>
-                      <Td>{student.name}</Td>
-                    </Tr>
-                  );
-                })}
-              </Tbody>
-            </Table>
-          ) : (
-            <Text>Não há alunos participando deste projeto ainda.</Text>
-          )}
-        </Text>
-      </Box>
-    </Box>
   );
 };
 

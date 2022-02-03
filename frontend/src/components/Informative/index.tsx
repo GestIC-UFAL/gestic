@@ -32,7 +32,7 @@ const Informative = () => {
       return <Text>Não há informativos por enquanto.</Text>;
     }
     return informativeList.map((informative, index) => (
-      <React.Fragment key={index}>
+      <React.Fragment key={`key-${index}`}>
         {index !== 0 && <Divider maxW="400px" borderBottomWidth="3px" size="md" m="auto" />}
         <InformativeItem informative={informative} withActions={false} />
       </React.Fragment>

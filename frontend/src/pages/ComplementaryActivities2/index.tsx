@@ -23,7 +23,7 @@ import { useAuth } from '../../providers/AuthProvider';
 import { api } from '../../services/api';
 
 interface activityData {
-  owner: string
+  owner: string;
   id: string;
   name: string;
   description: string;
@@ -81,11 +81,15 @@ const ComplementaryActivities = () => {
           return (
             activity?.owner?.toLowerCase().includes(value.toLowerCase()) ||
             activity?.name?.toLowerCase().includes(value.toLowerCase()) ||
-            activity?.description?.toLowerCase().includes(value.toLowerCase() ||
-            activity?.group?.toLowerCase().includes(value.toLowerCase()) ||
-            activity?.hours?.toLowerCase().includes(value.toLowerCase()) ||
-            activity?.start?.toLowerCase().includes(value.toLowerCase()) ||
-            activity?.end?.toLowerCase().includes(value.toLowerCase()))
+            activity?.description
+              ?.toLowerCase()
+              .includes(
+                value.toLowerCase() ||
+                  activity?.group?.toLowerCase().includes(value.toLowerCase()) ||
+                  activity?.hours?.toLowerCase().includes(value.toLowerCase()) ||
+                  activity?.start?.toLowerCase().includes(value.toLowerCase()) ||
+                  activity?.end?.toLowerCase().includes(value.toLowerCase()),
+              )
           );
         });
         setActivitiesSearch(newActivities);

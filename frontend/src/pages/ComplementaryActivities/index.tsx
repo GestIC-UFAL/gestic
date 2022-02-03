@@ -14,8 +14,6 @@ import { api } from '../../services/api';
 // import { usersMock } from '../../services/mocks';
 import { useAuth } from '../../providers/AuthProvider';
 
-
-
 const schema = yup.object().shape({
   name: yup.string().required('Nome é obrigatório'),
   description: yup.string().required('Description é obrigatório'),
@@ -26,7 +24,7 @@ const schema = yup.object().shape({
 });
 
 type complementaryInputs = {
-  owner: string
+  owner: string;
   id: string;
   name: string;
   description: string;
@@ -49,12 +47,11 @@ const ComplementaryActivities = () => {
 
   const { user } = useAuth();
 
-
-  //
-  
   //
 
-  const onSubmit = async ({ name, description, group, hours, start, end}: complementaryInputs) => {
+  //
+
+  const onSubmit = async ({ name, description, group, hours, start, end }: complementaryInputs) => {
     try {
       await api.post('/complementary', {
         ownerId: user.id,
@@ -63,7 +60,7 @@ const ComplementaryActivities = () => {
         group,
         hours,
         start,
-        end
+        end,
       });
 
       toast({
@@ -110,7 +107,12 @@ const ComplementaryActivities = () => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <CustomInput {...field} type="text" placeholder="Descrição da Atividade" errorMessage={errors?.surname?.message} />
+                <CustomInput
+                  {...field}
+                  type="text"
+                  placeholder="Descrição da Atividade"
+                  errorMessage={errors?.surname?.message}
+                />
               )}
             />
 
@@ -141,7 +143,12 @@ const ComplementaryActivities = () => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <CustomInput {...field} type="text" placeholder="Data de Início da Atividade" errorMessage={errors?.start?.message} />
+                <CustomInput
+                  {...field}
+                  type="text"
+                  placeholder="Data de Início da Atividade"
+                  errorMessage={errors?.start?.message}
+                />
               )}
             />
             <Box my={2} />
@@ -151,7 +158,12 @@ const ComplementaryActivities = () => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <CustomInput {...field} type="text" placeholder="Data de Término da Atividade" errorMessage={errors?.end?.message} />
+                <CustomInput
+                  {...field}
+                  type="text"
+                  placeholder="Data de Término da Atividade"
+                  errorMessage={errors?.end?.message}
+                />
               )}
             />
           </Stack>
@@ -170,7 +182,7 @@ const ComplementaryActivities = () => {
               Adicionar outra Atividade Complementar
             </Button>
             <Box my={2} /> */}
-            
+
             <Button
               mt={7}
               width="100%"

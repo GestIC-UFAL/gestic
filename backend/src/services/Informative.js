@@ -1,11 +1,11 @@
 const UserService = require("./User");
-const Service = require('./Service');
-const db = require('../database/models')
-const uuid = require('uuid');
+const Service = require("./Service");
+const db = require("../database/models");
+const uuid = require("uuid");
 
 class Informative extends Service {
     constructor() {
-        super('informative');
+        super("informative");
     }
 
     async insert({ token, ownerId, title, content }) {
@@ -23,16 +23,24 @@ class Informative extends Service {
         }
     }
 
-    async update({ token, id, ownerId,
-        title = undefined, content = undefined }) {
+    async update({
+        token,
+        id,
+        ownerId,
+        title = undefined,
+        content = undefined,
+    }) {
         try {
-            let informative = await super.update({ token, ownerId, id});
-            await db.informative.update({
-                title: title ? title : informative.title,
-                content: content ? content : informative.content,
-            }, {
-                where: { id },
-            });
+            let informative = await super.update({ token, ownerId, id });
+            await db.informative.update(
+                {
+                    title: title ? title : informative.title,
+                    content: content ? content : informative.content,
+                },
+                {
+                    where: { id },
+                }
+            );
             informative = await db.informative.findByPk(id);
             return informative;
         } catch (err) {
@@ -40,6 +48,5 @@ class Informative extends Service {
         }
     }
 }
-
 
 module.exports = Informative;

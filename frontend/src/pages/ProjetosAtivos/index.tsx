@@ -48,7 +48,7 @@ const ProjetosAtivos = () => {
   const getAllActiveProjects = async () => {
     setIsLoading(true);
     try {
-      const { data } = await api.get('/project');
+      const { data } = await api.get('/project/all');
 
       setActiveProjects(data);
       setActiveProjectsSearch(data);

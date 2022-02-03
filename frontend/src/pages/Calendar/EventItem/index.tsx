@@ -18,11 +18,11 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useHistory, useParams } from 'react-router-dom';
+import { BsTrashFill } from 'react-icons/bs';
+import { MdModeEdit } from 'react-icons/md';
 import { useAuth } from '../../../providers/AuthProvider';
 import { Page } from '../../../components/Page';
 import { api } from '../../../services/api';
-import { BsTrashFill } from 'react-icons/bs';
-import { MdModeEdit } from 'react-icons/md';
 
 const EventItemPage = () => {
   const [isLargerThan766] = useMediaQuery('(max-width: 766px)');
@@ -60,7 +60,7 @@ const EventItemPage = () => {
 
   const removeEvent = async () => {
     try {
-      await api.delete(`/event/${event.id}`)
+      await api.delete(`/event/${event.id}`);
       toast({
         title: 'Evento deletado com sucesso',
         status: 'success',
@@ -77,7 +77,6 @@ const EventItemPage = () => {
         isClosable: true,
       });
     } finally {
-
       onClose();
     }
   };
@@ -158,7 +157,14 @@ export const EventItem = ({ event, clickToRemove = () => {}, withActions = true 
         </Heading>
         {user && withActions && (
           <Box>
-            <IconButton variant="outline" onClick={() => history.push(`eventos/edit/${event.id}`)} colorScheme="blue" aria-label="Editar" mr={2} icon={<MdModeEdit />} />
+            <IconButton
+              variant="outline"
+              onClick={() => history.push(`eventos/edit/${event.id}`)}
+              colorScheme="blue"
+              aria-label="Editar"
+              mr={2}
+              icon={<MdModeEdit />}
+            />
             <IconButton
               variant="outline"
               colorScheme="red"

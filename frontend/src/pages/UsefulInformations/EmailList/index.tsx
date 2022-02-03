@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Box, Flex, Heading, Input, InputGroup, InputRightElement, Link, Text, useMediaQuery } from '@chakra-ui/react';
-import { Page } from '../../../components/Page';
 import { useHistory } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
+import { Page } from '../../../components/Page';
 
 const fixedEmails = [
   {
@@ -98,7 +98,7 @@ const EmailListPage = () => {
           {fixedEmailListSearch.length ? (
             fixedEmailListSearch.map(currentItem => (
               <>
-                <Flex flexDirection={isSmallerThan766 ? 'column': 'row'}>
+                <Flex flexDirection={isSmallerThan766 ? 'column' : 'row'}>
                   <Text fontWeight="bolder" mr={2}>
                     {currentItem.name}:
                   </Text>
@@ -118,7 +118,7 @@ const EmailListPage = () => {
               </Heading>
               {emailListSearch.map(currentItem => (
                 <>
-                  <Flex flexDirection={isSmallerThan766 ? 'column': 'row'}>
+                  <Flex flexDirection={isSmallerThan766 ? 'column' : 'row'}>
                     <Text fontWeight="bolder" mr={2}>
                       {currentItem.name}:
                     </Text>

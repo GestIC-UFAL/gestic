@@ -18,14 +18,11 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "react-hooks"
-  ],
+  "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
+    "react-hooks/exhaustive-deps": "off",
+    "no-console": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "react/prop-types:": "off",
     "spaced-comment": "off",
     "import/no-unresolved": "off",
@@ -46,7 +43,7 @@
     "react/prop-types": "off",
     "react/forbid-prop-types": "off",
     "react/display-name": "off",
-    "react/no-array-index-key": "warn",
+    "react/no-array-index-key": "off",
     "react/jsx-key": "warn",
     "import/order": "warn",
     "import/no-cycle": "warn",
@@ -60,12 +57,16 @@
     "jsx-a11y/anchor-is-valid": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-use-before-define": ["warn"],
-    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/ban-ts-comment": "warn",
-    "@typescript-eslint/no-unused-vars": ["warn", {
-      "argsIgnorePattern": "_"
-    }],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "_"
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -75,7 +76,6 @@
         "jsx": "never",
         "tsx": "never"
       }
-
     ],
     "camelcase": "off"
   },

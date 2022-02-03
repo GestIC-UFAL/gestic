@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Box, Button, Heading, Spinner, Stack, useMediaQuery, Text, useToast } from '@chakra-ui/react';
-import { Page } from '../../../components/Page';
 import { useHistory, useParams } from 'react-router-dom';
-import { api } from '../../../services/api';
 import { Controller, useForm } from 'react-hook-form';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { api } from '../../../services/api';
+import { Page } from '../../../components/Page';
 import { CustomInput } from '../../../components/CustomInput';
 import { CustomTextarea } from '../../../components/CustomTextarea';
 
@@ -81,7 +81,7 @@ const InformativeNewEdit = () => {
     }
   };
 
-  console.log(oldInformative)
+  console.log(oldInformative);
 
   return (
     <Page>

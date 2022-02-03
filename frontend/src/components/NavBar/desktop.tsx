@@ -20,8 +20,8 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { useAuth } from '../../providers/AuthProvider';
 import { BiChevronDown } from 'react-icons/bi';
+import { useAuth } from '../../providers/AuthProvider';
 
 export const NavBarDesktop = () => {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();

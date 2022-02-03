@@ -13,28 +13,28 @@ import {
   SimpleGrid,
   Checkbox,
 } from '@chakra-ui/react';
-import { Page } from '../../../components/Page';
 import { useHistory, useParams } from 'react-router-dom';
-import { api } from '../../../services/api';
 import { Controller, useForm } from 'react-hook-form';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import DatePicker from 'react-date-picker';
 import { CustomInput } from '../../../components/CustomInput';
 import { CustomTextarea } from '../../../components/CustomTextarea';
-import DatePicker from 'react-date-picker';
+import { api } from '../../../services/api';
+import { Page } from '../../../components/Page';
 
 const schema = yup.object().shape({
   title: yup.string().required('Campo obrigatório'),
-  startDate: yup.string().required('Campo obrigatório'),
+  start: yup.string().required('Campo obrigatório'),
 });
 
 type EventFormInputs = {
   id?: string;
   title: string;
   content: string;
-  startDate: string;
-  endDate: string;
+  start: string;
+  end: string;
   allDay: boolean;
 };
 
@@ -52,6 +52,9 @@ const EventNewEdit = () => {
     try {
       const { data } = await api.get(`/event/${id}`);
       if (data) {
+        data.start = new Date(data.start);
+        data.end = new Date(data.end);
+
         setOldEvent(data);
       }
     } catch (err) {
@@ -74,29 +77,29 @@ const EventNewEdit = () => {
 
   const { errors } = formState;
   const onSubmit = async (data: EventFormInputs) => {
-    console.log(data)
-    // try {
-    //   if (id) {
-    //     await api.put('event', { ...data, id });
-    //   } else {
-    //     await api.post('event', data);
-    //   }
-    //   toast({
-    //     title: id ? 'Evento editado com sucesso' : 'Novo evento criado com sucesso',
-    //     status: 'success',
-    //     position: 'top-right',
-    //     isClosable: true,
-    //   });
-    //   history.push('/eventos');
-    // } catch {
-    //   toast({
-    //     title: `Ocorreu um erro ao ${id ? 'editar' : 'criar'} um novo evento na plataforma`,
-    //     description: 'Tente novamente mais tarde',
-    //     status: 'error',
-    //     position: 'top-right',
-    //     isClosable: true,
-    //   });
-    // }
+    console.log(data);
+    try {
+      if (id) {
+        await api.put('event', { ...data, id });
+      } else {
+        await api.post('event', data);
+      }
+      toast({
+        title: id ? 'Evento editado com sucesso' : 'Novo evento criado com sucesso',
+        status: 'success',
+        position: 'top-right',
+        isClosable: true,
+      });
+      history.push('/eventos');
+    } catch {
+      toast({
+        title: `Ocorreu um erro ao ${id ? 'editar' : 'criar'} um novo evento na plataforma`,
+        description: 'Tente novamente mais tarde',
+        status: 'error',
+        position: 'top-right',
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -137,8 +140,8 @@ const EventNewEdit = () => {
                         // defaultValue={oldEvent?.content}
                       />
                     )}
-                    defaultValue={oldEvent?.startDate}
-                    name="startDate"
+                    defaultValue={oldEvent?.start}
+                    name="start"
                     control={control}
                   />
                 </FormControl>
@@ -156,8 +159,8 @@ const EventNewEdit = () => {
                         // defaultValue={oldEvent?.content}
                       />
                     )}
-                    defaultValue={oldEvent?.endDate}
-                    name="endDate"
+                    defaultValue={oldEvent?.end}
+                    name="end"
                     control={control}
                   />
                 </FormControl>
@@ -165,11 +168,7 @@ const EventNewEdit = () => {
                 <FormControl display="flex">
                   <Controller
                     render={({ field }) => (
-                      <Checkbox
-                        {...field}
-                        errorMessage={errors?.allDay?.message}
-                        defaultValue={oldEvent?.allDay}
-                      >
+                      <Checkbox {...field} errorMessage={errors?.allDay?.message} defaultValue={oldEvent?.allDay}>
                         É o dia inteiro?
                       </Checkbox>
                     )}

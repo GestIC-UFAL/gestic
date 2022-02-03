@@ -8,10 +8,10 @@ import { useToast, Box, Button, Stack, Text, Link, FormLabel, FormControl } from
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { useRef } from 'react';
 import * as E from './styles';
 import { CustomInput } from '../../components/CustomInput';
 import { api } from '../../services/api';
-import { useRef } from 'react';
 
 const schema = yup.object().shape({
   name: yup.string().required('Nome é obrigatório'),
@@ -34,7 +34,7 @@ const SignUp = () => {
     reValidateMode: 'onBlur',
     resolver: yupResolver(schema),
   });
-  const [profile,setProfile] = React.useState('Estudante');
+  const [profile, setProfile] = React.useState('Estudante');
   const filesElement = useRef(null);
 
   const { push } = useHistory();
@@ -42,27 +42,27 @@ const SignUp = () => {
 
   const { errors } = formState;
 
-  const onSubmit = async ({ name, surname, email, password, title}: SignUpFormInputs) => {
+  const onSubmit = async ({ name, surname, email, password, title }: SignUpFormInputs) => {
     console.log(profile);
     const dataForm = new FormData();
     const file = filesElement?.current?.files[0];
     dataForm.append('file', file);
     console.log(file);
     try {
-      
-      api.post('/access/register', {
-        name: `${name} ${surname}`,
-        email,
-        password,
-        profile: profile,
-        title,
-      }).then((response)=>{
-        console.log(response.data.id);
-        dataForm.append('user_id',response.data.id);
-        api.post('/access/register/file', dataForm);
-      });
-      
-      
+      api
+        .post('/access/register', {
+          name: `${name} ${surname}`,
+          email,
+          password,
+          profile,
+          title,
+        })
+        .then(response => {
+          console.log(response.data.id);
+          dataForm.append('user_id', response.data.id);
+          api.post('/access/register/file', dataForm);
+        });
+
       toast({
         title: 'Cadastro realizado com sucesso',
         description: 'Você pode realizar o acesso agora',
@@ -127,12 +127,11 @@ const SignUp = () => {
               render={({ field }) => (
                 <FormControl isInvalid={!!errors?.profile?.message} errortext={errors?.profile?.message}>
                   <FormLabel htmlFor={field.name}>profile</FormLabel>
-                  <select value= {profile} onChange = {(event) =>setProfile(event.target.value)}> 
+                  <select value={profile} onChange={event => setProfile(event.target.value)}>
                     <option value="Estudante">Estudante</option>
                     <option value="Monitor">Monitor</option>
                   </select>
                 </FormControl>
-
               )}
             />
 
@@ -163,8 +162,8 @@ const SignUp = () => {
                 />
               )}
             />
-              <h4>Imagem perfil:</h4>
-             <input type="file" multiple ref={filesElement} />
+            <h4>Imagem perfil:</h4>
+            <input type="file" multiple ref={filesElement} />
           </Stack>
 
           <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column">

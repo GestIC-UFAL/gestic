@@ -6,6 +6,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { Page } from '../../../components/Page';
 import { useAuth } from '../../../providers/AuthProvider';
+import { api } from '../../../services/api';
 
 const localizer = momentLocalizer(moment);
 
@@ -19,17 +20,17 @@ const CalendarPage = () => {
   const [isLoading, setIsLoading] = React.useState(true);
 
   const getEventList = async () => {
-    // try {
-    //   const { data } = await api.get('/event');
-    //   if (data.length) {
-    //     setEventList(data || []);
-    //     setEventListSearch(data || []);
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    try {
+      const { data } = await api.get('/event');
+      if (data.length) {
+        setEventList(data || []);
+        // setEventListSearch(data || []);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   React.useEffect(() => {

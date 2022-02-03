@@ -70,6 +70,7 @@ const AuthProvider: React.FC = ({ children }) => {
       return response;
     },
     function err(error) {
+      console.log(error.response);
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       if (error.response && error.response.data) {
         /*eslint no-alert: "off"*/

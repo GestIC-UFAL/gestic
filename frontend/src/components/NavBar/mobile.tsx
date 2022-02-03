@@ -91,19 +91,25 @@ export const NavBarMobile = () => {
                     <Link href="/informacoes-uteis">Informações Úteis</Link>
                   </Box>
                   <Box fontSize="1.2rem" onClick={onToggle} mb={3}>
-                    <Link color="black" href="/calendario">Calendário</Link>
+                    <Link color="black" href="/calendario">
+                      Calendário
+                    </Link>
                   </Box>
                   <Box fontSize="1.2rem" onClick={onToggle} mb={3}>
                     <Link href="/informativos">Informativos</Link>
                   </Box>
                   <Box fontSize="1.2rem" onClick={onToggle} mb={3}>
-                    <Link color="black" href="/projetos-ativos">Projetos Ativos</Link>
+                    <Link color="black" href="/projetos-ativos">
+                      Projetos Ativos
+                    </Link>
                   </Box>
                   <Box fontSize="1.2rem" onClick={onToggle} mb={3}>
                     <Link href="/grupos-de-pesquisa">Grupos de Pesquisa</Link>
                   </Box>
                   <Box fontSize="1.2rem" onClick={onToggle} mb={3}>
-                    <Link color="black" href="/ofertas-disciplinas">Ofertas de Disciplina</Link>
+                    <Link color="black" href="/ofertas-disciplinas">
+                      Ofertas de Disciplina
+                    </Link>
                   </Box>
                 </Box>
                 {user && user.id !== '' ? (

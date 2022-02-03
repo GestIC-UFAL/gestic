@@ -18,11 +18,11 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useHistory, useParams } from 'react-router-dom';
+import { BsTrashFill } from 'react-icons/bs';
+import { MdModeEdit } from 'react-icons/md';
 import { useAuth } from '../../../providers/AuthProvider';
 import { Page } from '../../../components/Page';
 import { api } from '../../../services/api';
-import { BsTrashFill } from 'react-icons/bs';
-import { MdModeEdit } from 'react-icons/md';
 
 const InformativeItemPage = () => {
   const [isLargerThan766] = useMediaQuery('(max-width: 766px)');
@@ -60,7 +60,7 @@ const InformativeItemPage = () => {
 
   const removeInformative = async () => {
     try {
-      await api.delete(`/informative/${informative.id}`)
+      await api.delete(`/informative/${informative.id}`);
       toast({
         title: 'Informativo deletado com sucesso',
         status: 'success',
@@ -77,7 +77,6 @@ const InformativeItemPage = () => {
         isClosable: true,
       });
     } finally {
-
       onClose();
     }
   };
@@ -158,7 +157,14 @@ export const InformativeItem = ({ informative, clickToRemove = () => {}, withAct
         </Heading>
         {user && withActions && (
           <Box>
-            <IconButton variant="outline" onClick={() => history.push(`informativos/edit/${informative.id}`)} colorScheme="blue" aria-label="Editar" mr={2} icon={<MdModeEdit />} />
+            <IconButton
+              variant="outline"
+              onClick={() => history.push(`informativos/edit/${informative.id}`)}
+              colorScheme="blue"
+              aria-label="Editar"
+              mr={2}
+              icon={<MdModeEdit />}
+            />
             <IconButton
               variant="outline"
               colorScheme="red"

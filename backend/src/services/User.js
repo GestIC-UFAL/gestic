@@ -28,12 +28,17 @@ class User {
                 token,
                 process.env.SECRET
             );
+
             const user = await db.user.findByPk(id);
             const profile = await db.profile.findByPk(profileId);
 
-            if (!user) return false;
-            if (validProfileTags.find((prof) => prof === profile.tag))
+            if (!user) {
+                return false;
+            }
+
+            if (validProfileTags.find((prof) => prof === profile.tag)) {
                 return true;
+            }
 
             return false;
         } catch (err) {

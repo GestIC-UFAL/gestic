@@ -1,33 +1,33 @@
 {
-  "research": {
-    "create": ["MONIT", "COOR", "TEC", "PROF"],
-    "edit": ["MONIT", "TEC", "COOR"]
-  },
-  "complementary_activities": {
-    "create": ["MONIT", "COOR", "TEC", "PROF"],
-    "edit": ["MONIT", "TEC", "COOR"]
-  },
-  "project": {
-    "create": ["MONIT", "COOR", "TEC", "PROF"],
-    "edit": ["MONIT", "TEC", "COOR"]
-  },
-  "informative": {
-    "create": ["COOR", "TEC", "PROF"],
-    "edit": ["TEC", "COOR"]
-  },
-  "offer": {
-    "create": ["COOR", "TEC", "PROF"],
-    "edit": ["TEC", "COOR"],
-    "deleteAll": ["TEC", "COOR"]
-  },
-  "ClassTimetable": {
-    "create": ["COOR", "TEC", "PROF", "ALUN"],
-    "edit": ["TEC", "COOR", "ALUN"],
-    "deleteAll": ["TEC", "COOR"]
-  },
-  "user": ["TEC", "COOR"],
-  "event": {
-    "create": ["MONIT", "COOR", "TEC"],
-    "edit": ["MONIT", "COOR", "TEC"]
-  }
+    "research": {
+        "create": ["MONIT", "COOR", "TEC", "PROF"],
+        "edit": ["MONIT", "TEC", "COOR"]
+    },
+    "complementary_activities": {
+        "create": ["MONIT", "COOR", "TEC", "PROF"],
+        "edit": ["MONIT", "TEC", "COOR"]
+    },
+    "project": {
+        "create": ["MONIT", "COOR", "TEC", "PROF"],
+        "edit": ["MONIT", "TEC", "COOR"]
+    },
+    "informative": {
+        "create": ["MONIT", "COOR", "TEC", "PROF"],
+        "edit": ["MONIT", "TEC", "COOR"]
+    },
+    "offer": {
+        "create": ["MONIT", "COOR", "TEC", "PROF"],
+        "edit": ["MONIT", "TEC", "COOR"],
+        "deleteAll": ["TEC", "COOR"]
+    },
+    "ClassTimetable": {
+        "create": ["COOR", "TEC", "PROF", "ALUN"],
+        "edit": ["TEC", "COOR", "ALUN"],
+        "deleteAll": ["TEC", "COOR"]
+    },
+    "user": ["TEC", "COOR"],
+    "event": {
+        "create": ["MONIT", "COOR", "TEC"],
+        "edit": ["MONIT", "COOR", "TEC"]
+    }
 }
